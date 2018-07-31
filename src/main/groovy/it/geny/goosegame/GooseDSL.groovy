@@ -49,7 +49,7 @@ class GooseDSL {
             rolls playerName, dice1, dice2
 
             def PRANK_CONDITION = prankId >= 0
-            def IS_PRANK_CONDITION = GOOSE_POSITION_LIST.contains(nextPosition)
+            def ON_GOOSE_CONDITION = GOOSE_POSITION_LIST.contains(nextPosition)
             def OVERCOMING_LIMIT_SCORE_CONDITION = nextPosition > LIMIT_SCORE
             def WIN_CONDITION = nextPosition == LIMIT_SCORE
             def JUMP_CONDITION = nextPosition == 6
@@ -59,7 +59,7 @@ class GooseDSL {
                     moves playerName, actualPosition, nextPosition
                     prankIt(delegate, prankId, actualPosition)
                     break
-                case IS_PRANK_CONDITION:
+                case ON_GOOSE_CONDITION:
                     moves playerName, actualPosition, nextPosition
                     checkIfPlayerOnGoose(delegate, nextPosition, dice1, dice2, playerName)
                     break
