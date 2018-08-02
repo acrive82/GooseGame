@@ -17,17 +17,17 @@ class GooseDSL {
 
 
     def addPlayer(playerName) {
-        if (!playersMap.containsKey(playerName)) {
-            playersMap[playerName] = 0
-            MessageGameBuilderDSL.build {
+        MessageGameBuilderDSL.build {
+            if (!playersMap.containsKey(playerName)) {
+                playersMap[playerName] = 0
                 listPlayers playersMap
-            }
-        } else {
-            MessageGameBuilderDSL.build {
+            } else {
                 existingPlayer playerName
             }
         }
+
     }
+
 
     def forceDiceRoll(diceRoll) {
         def diceRollList = diceRoll.findAll(/\d+/)
@@ -53,7 +53,7 @@ class GooseDSL {
             def OVERCOMING_LIMIT_SCORE_CONDITION = nextPosition > LIMIT_SCORE
             def WIN_CONDITION = nextPosition == LIMIT_SCORE
             def JUMP_CONDITION = nextPosition == 6
-            
+
             switch (true) {
                 case PRANK_CONDITION:
                     moves playerName, actualPosition, nextPosition
@@ -94,7 +94,6 @@ class GooseDSL {
         def positionToPrank = playersMap[userToPrank]
 
         messageBuilderDelegate.prank userToPrank, positionToPrank, actualPosition
-
     }
 
     def isOccupiedPrankIt(int nextPosition) {
@@ -102,7 +101,6 @@ class GooseDSL {
     }
 
     private def checkIfPlayerOnGoose(messageBuilderDelegate, int nextPosition, int dice1, int dice2, String playerName) {
-
         if (!GOOSE_POSITION_LIST.contains(nextPosition)) {
             return messageBuilderDelegate.resultMessage
         } else {
